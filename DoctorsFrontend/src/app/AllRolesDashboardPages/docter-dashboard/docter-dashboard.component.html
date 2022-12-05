@@ -1,0 +1,98 @@
+<diV class="grid grid-cols-12 gap-y-8 md:gap-y-0 md:gap-x-8">
+    <div class="col-span-12 md:col-span-6 shadow-md bg-white rounded-lg h-40 px-5 py-5 flex flex-col gap-y-4 justify-center items-center">
+        <p class="font-semibold text-black text-xl text-center">Overall Total Patients</p>
+        <p class="font-bold text-blue-800 text-center text-3xl">{{patientsData.length}} {{patientsData.length > 10 ? '+' : ''}}</p>
+    </div>
+    <div class="col-span-12 md:col-span-6 shadow-md bg-white rounded-lg h-40 px-5 py-5 flex flex-col gap-y-4 justify-center items-center">
+        <p class="font-semibold text-black text-xl text-center">My Total Patients</p>
+        <p class="font-bold text-blue-800 text-center text-3xl">{{myPatients.length }} {{myPatients.length > 10 ? '+' : ''}}</p>
+    </div>
+</diV>
+<div class="mt-12 text-primary">
+  <app-patients-report-chart></app-patients-report-chart>
+</div>
+<div class="mt-12">
+    <!-- Page content goes here  -->
+  
+    <div class="mb-8 flex justify-between flex-wrap sm:flex-nowrap">
+      <h1 class="text-2xl font-semibold text-black">List of all Patients</h1>
+    </div>
+    <div *ngIf="!patientsData || patientsData.length === 0" class="flex justify-center mt-8">
+      <p class="text-black text-lg">No any patient added here yet!</p>
+    </div>
+    <div
+      class="overflow-x-auto relative mt-8"
+      *ngIf="patientsData && patientsData.length > 0"
+    >
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead
+          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Created_at
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Name
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Phone
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Gender
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Age
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Height
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Weight
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Doctor
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Updated_at
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let data of patientsData"
+            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+            >
+
+            <td class="py-4 px-6">
+              {{ moment(data.created_at).format('ll') }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.name }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.phone }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.gender }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.age }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.height }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.weight }}
+            </td>
+            <td class="py-4 px-6">
+              {{ data.doctor.name }} ({{ data.doctor.specialization }})
+            </td>
+            <td class="py-4 px-6">
+              {{ moment(data.updated_at).format('ll') }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
